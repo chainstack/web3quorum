@@ -6,7 +6,7 @@ _A web3py extension that supports [Quorum](https://www.goquorum.com/) APIs: [RAF
 
    - pip install web3quorum
 
-   - examples of usage
+   - Examples of usage
 
    ```python
    from web3 import HTTPProvider
@@ -35,11 +35,15 @@ _A web3py extension that supports [Quorum](https://www.goquorum.com/) APIs: [RAF
   >>> w3.raft.remove_peer(2)
 
   ```
-  - Resolve enode to raft Id
+  - Resolve enode or hostname to raft Id
   ```
   from web3quorum import enode_to_raft_id
   
-  >>> enode_to_raft_id(api, 'enode://db207d418bbbfcb0639f303259f62bf1da3c95aceb051f32cac8361a1c08276f4296f8e3f57833caac9c2aaa28a90158bf6eaf3f8ad602ac27a3e0ed6c8c765c@1.1.1.1:30303'))
+  >>> enode_to_raft_id(api, 'enode://db207d418bbbfcb0639f303259f62bf1da3c95aceb051f32cac8361a1c08276f4296f8e3f57833caac9c2aaa28a90158bf6eaf3f8ad602ac27a3e0ed6c8c765c@1.1.1.1:30303')
   2
+  
+  - Use web3Quorum mocking object in your tests
+  from web3quorum import Web3QuorumMock
+  
   
   ```
