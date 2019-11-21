@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "web3quorum"
-version = "1.0.1"
+version = "1.0.2"
 description = "A library to interact with Quorum API"
 authors = ["Alex Khaerov <i@hayorov.ru>"]
 license = "MIT"

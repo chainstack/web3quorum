@@ -29,8 +29,30 @@ class Raft(Module):
 
 
 class Istanbul(Module):
-    # TODO: Need to implement
-    pass
+
+    @to_tuple
+    def get_validators(self) -> tuple:
+        return self.web3.manager.request_blocking("istanbul_getValidators", [])
+
+    @to_tuple
+    def get_validators_at_hash(self, hash: str) -> tuple:
+        return self.web3.manager.request_blocking("istanbul_getValidators", [hash])
+
+    def discard(self, addr: str):
+        return self.web3.manager.request_blocking("istanbul_discard", [addr])
+
+    def propose(self, addr: str, auth: bool):
+        return self.web3.manager.request_blocking("istanbul_propose", [addr, auth])
+
+    @property
+    def candidates(self):
+        return self.web3.manager.request_blocking("istanbul_candidates", [])
+
+    def get_snapshot(self):
+        return self.web3.manager.request_blocking("istanbul_getSnapshot", [])
+
+    def get_snapshot_at_hash(self, hash: str):
+        return self.web3.manager.request_blocking("istanbul_getSnapshotAtHash", [hash])
 
 
 class Web3Quorum(Web3):
@@ -59,7 +81,23 @@ attrs = {'raft.cluster': [{'ip': '1.2.3.4',
          'raft.add_peer.return_value': 1,
          'raft.remove_peer.return_value': None,
          'raft.role': 'verifier',
-         'raft.leader': 'foo'}
+         'raft.leader': 'foo',
+         'istanbul.get_validators.return_value': ('0x7100a64b994d363c793a489df0963006598c0760',),
+         'istanbul.discard.return_value': None,
+         'istanbul.propose.return_value': None,
+         'istanbul.candidates': {'0x7100a64b994d363c793a489df0963006598c0760': False},
+         'istanbul.get_snapshot.return_value': {
+             'epoch': 30000,
+             'hash': "0x9052a3b052045fb27e7d33d961314d7136bde52999312500d47911e143c5fcad",
+             'number': 172093,
+             'policy': 0,
+             'tally': {},
+             'validators': [],
+             'votes': []
+         }}
+
+attrs.update({'istanbul.get_snapshot_at_hash.return_value': attrs['istanbul.get_snapshot.return_value']})
+attrs.update({'istanbul.get_validators_at_hash.return_value': attrs['istanbul.get_validators.return_value']})
 
 web3mock = Mock(**attrs)
 
