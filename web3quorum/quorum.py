@@ -64,7 +64,7 @@ class Istanbul(Module):
 class Web3Quorum(Web3):
 
     def __init__(self, *args, **kwargs):
-        # add Raft and ibft apis
+        # add Raft and IBFT APIs
         kwargs['modules'] = kwargs.get('modules', {})
         kwargs['modules'].update({'raft': (Raft,), 'istanbul': (Istanbul,)})
         super().__init__(*args, **kwargs)
@@ -73,12 +73,12 @@ class Web3Quorum(Web3):
         self.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 
-attrs = {'raft.cluster': [{'ip': '1.2.3.4',
+attrs = {'raft.cluster': [{'hostname': '1.2.3.4',
                            'nodeId': 'foo',
                            'p2pPort': 30303,
                            'raftId': 2,
                            'raftPort': 50400},
-                          {'ip': '9.9.9.9',
+                          {'hostname': '9.9.9.9',
                            'nodeId': 'bar',
                            'p2pPort': 30303,
                            'raftId': 1,

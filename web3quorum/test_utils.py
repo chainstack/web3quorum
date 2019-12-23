@@ -18,8 +18,8 @@ class TestUtils(unittest.TestCase):
 
         assert raft_id == 2
 
-    def test_ip_to_raft_id(self):
-        raft_id = utils.ip_to_raft_id(web3mock, '1.2.3.4')
+    def test_hostname_to_raft_id(self):
+        raft_id = utils.hostname_to_raft_id(web3mock, '1.2.3.4')
 
         assert raft_id == 2
 
