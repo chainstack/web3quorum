@@ -11,7 +11,7 @@ def enode_to_raft_id(w3, enode: str) -> int:
             return int(node.get('raftId'))
 
 
-def ip_to_raft_id(w3, hostname: str) -> int:
+def hostname_to_raft_id(w3, hostname: str) -> int:
     """Resolves hostname into raft Id."""
     cluster = w3.raft.cluster
     for node in cluster:
