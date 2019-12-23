@@ -17,6 +17,12 @@ class Raft(Module):
     def role(self) -> str:
         return self.web3.manager.request_blocking("raft_role", [])
 
+    def add_learner(self, enode_url: str) -> int:
+        return self.web3.manager.request_blocking("raft_addLearner", [enode_url])
+
+    def promote_to_peer(self, raft_id: bool) -> bool:
+        return self.web3.manager.request_blocking("raft_promoteToPeer", [raft_id])
+
     def add_peer(self, enode_url: str) -> int:
         return self.web3.manager.request_blocking("raft_addPeer", [enode_url])
 
@@ -78,6 +84,8 @@ attrs = {'raft.cluster': [{'ip': '1.2.3.4',
                            'raftId': 1,
                            'raftPort': 50400},
                           ],
+         'raft.add_learner.return_value': 1,
+         'raft.promote_to_peer.return_value': True,
          'raft.add_peer.return_value': 1,
          'raft.remove_peer.return_value': None,
          'raft.role': 'verifier',
