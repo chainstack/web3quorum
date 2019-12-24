@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "web3quorum"
-version = "1.1.0"
+version = "1.1.1"
 description = "A library to interact with Quorum API"
 authors = ["Chainstack <dev@chainstack.com>"]
 license = "MIT"
